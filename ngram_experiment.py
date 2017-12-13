@@ -5,11 +5,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-file_path1 = '/Users/datamining/Desktop/1.txt'
-file_path2 = '/Users/datamining/Desktop/2.txt'
 
-input1 = "扶贫 开发 工作 取得 很 大 成绩"
-input2 = "扶贫 开发 工作 得到 很 大 成绩"
 
 
 def count_total_number_dictionary(storage_dictionary):
@@ -34,7 +30,7 @@ def get_two_gram(input_string, storage_dictionary1, storage_dictionary2, total_c
     return multi_ratio, dictionary_ratio
 
 
-def get_one_gram(input_string, storage_dictionary1,total_count):
+def get_one_gram(input_string, storage_dictionary1, total_count):
     multi_ratio = 0
     dictionary_ratio = {}
     strs = input_string.split()
@@ -53,7 +49,7 @@ def get_dictionary_from_txt_file(file_path):
         iter_f = iter(f)
         for line in iter_f:
             strs = line.split()
-            storage_dictionary[strs[0]] = strs[1]
+            storage_dictionary[strs[0]] = int(strs[1])
     return storage_dictionary
 
 
@@ -110,6 +106,12 @@ def same_input_txt_file(input_name):
         f.write(str_write)
 
 
-different_input_txt_file(input1)
+if __name__ == "__main__":
+    file_path1 = '/Users/datamining/Desktop/1.txt'
+    file_path2 = '/Users/datamining/Desktop/2.txt'
+
+    input1 = "扶贫 开发 工作 取得 很 大 成绩"
+    input2 = "扶贫 开发 工作 得到 很 大 成绩"
+    different_input_txt_file(input1)
 # different_input_txt_file(input2)
 # same_input_txt_file(input2)

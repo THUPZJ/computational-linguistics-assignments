@@ -8,8 +8,10 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+
 def get_file_list(file_path):
     files_path = os.listdir(file_path)
+    # print(files_path)
     return files_path
 
 
@@ -42,9 +44,13 @@ def count_token_from_txt_file(dir_path, file_path, token_dictionary):
                     start = end
 
 
-def count_token_from_file_list(dir_path, files, token_dictionary):
-    for file_path in files:
-        count_token_from_txt_file(dir_path, file_path, token_dictionary)
+def count_token_from_file_list(dir_path1, dir_path2, dir_path3, files1, files2, files3, token_dictionary):
+    for file_path1 in files1:
+        count_token_from_txt_file(dir_path1, file_path1, token_dictionary)
+    for file_path2 in files2:
+        count_token_from_txt_file(dir_path2, file_path2, token_dictionary)
+    for file_path3 in files3:
+        count_token_from_txt_file(dir_path3, file_path3, token_dictionary)
 
 
 '''def sorted_dict_values1(adict):
@@ -56,26 +62,32 @@ def count_token_from_file_list(dir_path, files, token_dictionary):
 '''dict = {'Title': '这是标题'}
 print json.dumps(dict, ensure_ascii=False, encoding='utf-8')'''
 
-path = "/Users/datamining/Desktop/熟语料"
-files = get_file_list(path)
+
+'''
+path1 = "/Users/datamining/Desktop/CL_4th/test"
+path2 = "/Users/datamining/Desktop/CL_4th/train"
+path3 = "/Users/datamining/Desktop/CL_4th/valid"
+files1 = get_file_list(path1)
+files2 = get_file_list(path2)
+files3 = get_file_list(path3)
 token_dictionary = {}
-count_token_from_file_list(path, files, token_dictionary)
+count_token_from_file_list(path1, path2, path3, files1, files2, files3, token_dictionary)
 
 
-#count_token_from_txtfile(path, files[0], token_dictionary)
+#count_token_from_txtfile(path, files[0], token_dictionary)'''
 '''for token, number in token_dictionary:
     print token.decode("unicode-escape"), ":", number, "\n"'''
-
+'''
 #print token_dictionary
 print len(token_dictionary)
 dict = sorted(token_dictionary.iteritems(), key=lambda d: d[1], reverse=True)
-#dict = sortedDictValues1(token_dictionary)
+
 print dict[0:100]
 #print json.dumps(token_dictionary, ensure_ascii=False, encoding='utf-8')
 
-'''with open('/Users/datamining/Desktop/1.txt', 'w') as f:
+with open('/Users/datamining/Desktop/1.txt', 'w') as f:
     for ite in dict:
-        f.write(ite[0]+'   '+str(ite[1])+'\n')'''
+        f.write(ite[0]+'   '+str(ite[1])+'\n')
     #f.write('one\n')
     #f.write('two')
 
@@ -91,10 +103,10 @@ for i in range(len(frequency_list)):
 plt.plot(np.log10(rank_frequency_list), np.log10(frequency_list))
 plt.xlabel("log rank")
 plt.ylabel("log frequency")
-plt.show()
+plt.show()'''
 '''s = []
 for File in files:   #遍历文件夹
-    print File.title()  # 打印结果'''
+    print File.title()''' # 打印结果'''
 '''if not os.path.isdir(File):   #判断是否是文件夹，不是文件夹才打开
           f = open(path+"/"+File);   #打开文件
           iter_f = iter(f);   #创建迭代器
