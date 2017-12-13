@@ -27,6 +27,7 @@ def get_n_gram(dir_path, file_path, token_dictionary, sen_start_dict, sen_end_di
         iter_f = iter(f)
         for line in iter_f:
             # print line.decode('gb18030')
+            line = line.decode('gb18030')
             start = 0
             end = 0
             whitespace = 0
@@ -48,6 +49,7 @@ def get_n_gram(dir_path, file_path, token_dictionary, sen_start_dict, sen_end_di
                 if line[i] == '/':
                     end = i
                 if end > start:
+                    print "line[i-1] is :", line[i-1]
                     if line[i-1] in sen_flag:
                         cur_is_sentence = True
                     current = line[start: end].decode('gb18030')
@@ -75,10 +77,14 @@ def get_n_gram(dir_path, file_path, token_dictionary, sen_start_dict, sen_end_di
                     start = end
                     cur_is_sentence = False
 
+def count_token_from_file_list(dir_path1, dir_path2, dir_path3, files1, files2, files3, token_dictionary, sen_start_dict, sen_end_dict, sen_flag):
+        for file_path1 in files1:
+            get_n_gram(dir_path1, file_path1, token_dictionary, sen_start_dict, sen_end_dict, sen_flag)
+        for file_path2 in files2:
+            get_n_gram(dir_path2, file_path2, token_dictionary, sen_start_dict, sen_end_dict, sen_flag)
+        for file_path3 in files3:
+            get_n_gram(dir_path3, file_path3, token_dictionary, sen_start_dict, sen_end_dict, sen_flag)
 
-def count_token_from_file_list(dir_path, files, token_dictionary, sen_start_dict, sen_end_dict, sen_flag):
-    for file_path in files:
-        get_n_gram(dir_path, file_path, token_dictionary, sen_start_dict, sen_end_dict, sen_flag)
 
 
 def count_total_number_dictionary(storage_dictionary):
@@ -149,24 +155,26 @@ def different_input_txt_file(input_name):
         f.write(str_write)
 
 
-different_input_txt_file(input1)
-different_input_txt_file(input2)
-
-path = "/Users/datamining/Desktop/熟语料"
-files = get_file_list(path)
-
+# different_input_txt_file(input1)
+# different_input_txt_file(input2)
+if __name__ == "__main__":
+    path1 = "/Users/datamining/Desktop/CL_4th/test"
+    path2 = "/Users/datamining/Desktop/CL_4th/train"
+    path3 = "/Users/datamining/Desktop/CL_4th/valid"
+    files1 = get_file_list(path1)
+    files2 = get_file_list(path2)
+    files3 = get_file_list(path3)
 # token_dictionary = {}
 # get_n_gram(path, files[0], token_dictionary)
-token_dictionary = {}
-count_token_from_file_list(path, files, token_dictionary)
+    token_dictionary = {}
+    count_token_from_file_list(path1, files1, token_dictionary)
 
-print len(token_dictionary)
-dict = sorted(token_dictionary.iteritems(), key=lambda d: d[1], reverse=True)
+    print len(token_dictionary)
+    dict = sorted(token_dictionary.iteritems(), key=lambda d: d[1], reverse=True)
 # dict = sortedDictValues1(token_dictionary)
-print dict[0:100]
+    print dict[0:100]
 # print json.dumps(token_dictionary, ensure_ascii=False, encoding='utf-8')
 
-with open('/Users/datamining/Desktop/2.txt', 'w') as f:
+'''with open('/Users/datamining/Desktop/2.txt', 'w') as f:
     for ite in dict:
-        f.write(ite[0]+'   '+str(ite[1])+'\n')
-
+        f.write(ite[0]+'   '+str(ite[1])+'\n')'''
